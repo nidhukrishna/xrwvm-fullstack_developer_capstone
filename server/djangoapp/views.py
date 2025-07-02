@@ -134,7 +134,7 @@ def add_review(request):
     if(request.user.is_anonymous == False):
         data = json.loads(request.body)
         try:
-            response = post_review(data)
+            response = post_review("http://localhost:3000/insert_review", data)
             return JsonResponse({"status":200})
         except:
             return JsonResponse({"status":401,"message":"Error in posting review"})
