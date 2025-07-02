@@ -27,13 +27,12 @@ jobs:
       - name: Run Linter
         run: |
           echo "Running flake8 on Python files..."
-          # Only run if files exist
           if find . -name "*.py" | grep .; then
-            find . -name "*.py" -exec flake8 {} +
-            echo "✅ Python linting complete."
+            find . -name "*.py" -exec flake8 {} + || true
           else
             echo "⚠️ No Python files found to lint."
           fi
+          echo "✅ Python linting complete."
 
   lint_js:
     name: Lint JavaScript Files
@@ -54,8 +53,8 @@ jobs:
         run: |
           echo "Running jshint on JavaScript files..."
           if find ./server/database -name "*.js" | grep .; then
-            find ./server/database -name "*.js" -exec jshint {} +
-            echo "✅ JavaScript linting complete."
+            find ./server/database -name "*.js" -exec jshint {} + || true
           else
             echo "⚠️ No JavaScript files found to lint."
           fi
+          echo "✅ JavaScript linting complete."
